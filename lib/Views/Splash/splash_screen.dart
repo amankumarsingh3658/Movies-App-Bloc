@@ -4,6 +4,7 @@ import 'package:movies_app_bloc/Config/Components/loading_widget.dart';
 import 'package:movies_app_bloc/Config/Components/round_button.dart';
 import 'package:movies_app_bloc/Config/Routes/routesName.dart';
 import 'package:movies_app_bloc/Data/Exceptions/app_exceptions.dart';
+import 'package:movies_app_bloc/Services/Splash/splash_services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,6 +14,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  SplashServices _splashServices = SplashServices();
+
+  @override
+  void initState() {
+    super.initState();
+    _splashServices.isLogin(context);
+  } 
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context).size;
@@ -21,13 +30,11 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-            child: Column(
-          children: [InternetExceptionWidget(onPress: (){},)],
+            child: Text(
+          "Splash Screen",
+          style: TextStyle(fontSize: 16),
         )),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        throw NoInternetException('Check your Internet connection');
-      }),
     );
   }
 }
