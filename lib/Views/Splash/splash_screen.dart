@@ -3,6 +3,7 @@ import 'package:movies_app_bloc/Config/Components/internet_exception_widget.dart
 import 'package:movies_app_bloc/Config/Components/loading_widget.dart';
 import 'package:movies_app_bloc/Config/Components/round_button.dart';
 import 'package:movies_app_bloc/Config/Routes/routesName.dart';
+import 'package:movies_app_bloc/Data/Exceptions/app_exceptions.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -24,6 +25,9 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [InternetExceptionWidget(onPress: (){},)],
         )),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        throw NoInternetException('Check your Internet connection');
+      }),
     );
   }
 }
