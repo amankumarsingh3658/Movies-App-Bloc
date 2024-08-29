@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app_bloc/Config/Components/internet_exception_widget.dart';
-import 'package:movies_app_bloc/Config/Components/loading_widget.dart';
-import 'package:movies_app_bloc/Config/Components/round_button.dart';
-import 'package:movies_app_bloc/Config/Routes/routesName.dart';
-import 'package:movies_app_bloc/Data/Exceptions/app_exceptions.dart';
 import 'package:movies_app_bloc/Services/Splash/splash_services.dart';
 
 class SplashScreen extends StatefulWidget {
