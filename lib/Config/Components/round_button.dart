@@ -11,7 +11,7 @@ class RoundButton extends StatelessWidget {
       required this.title,
       required this.onPress,
       this.height = 50,
-      this.width = 100});
+      this.width = 200});
 
   @override
   Widget build(BuildContext context) {
