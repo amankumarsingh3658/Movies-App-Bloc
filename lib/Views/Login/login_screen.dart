@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app_bloc/Config/Components/round_button.dart';
-import 'package:movies_app_bloc/Model/User/user_model.dart';
 import 'package:movies_app_bloc/Views/Login/Widgets/Email_Input_widget.dart';
 import 'package:movies_app_bloc/Views/Login/Widgets/password_input_widget.dart';
 import 'package:movies_app_bloc/bloc/Login%20Bloc/login_bloc.dart';
@@ -23,9 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _loginBloc = LoginBloc();
+     _loginBloc = LoginBloc();
   }
 
   @override
@@ -58,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   BlocBuilder<LoginBloc, LoginState>(
                     buildWhen: (previous, current) => false,
                     builder: (context, state) {
-                      print('object');
                       return RoundButton(
                           title: 'Login',
                           onPress: () {
