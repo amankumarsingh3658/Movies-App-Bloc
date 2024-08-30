@@ -1,4 +1,4 @@
-# movies_app_bloc
+# blocXMvvmLoginApp
 
 A new Flutter project.
 
