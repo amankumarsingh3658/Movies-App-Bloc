@@ -33,7 +33,9 @@ class EmailInputWidget extends StatelessWidget {
           onChanged: (value) {
             context.read<LoginBloc>().add(EmailChanged(email: value));
           },
-          onFieldSubmitted: (value) {},
+          onFieldSubmitted: (value) {
+            context.read<LoginBloc>().add(EmailChanged(email: value));
+          },
         );
       },
     );

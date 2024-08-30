@@ -27,7 +27,6 @@ class NetworkApiServices extends BaseApiServices {
 
   @override
   Future<dynamic> postApi(String url, dynamic data) async {
-    dynamic data;
     try {
       final response = await http
           .post(Uri.parse(url), body: data)

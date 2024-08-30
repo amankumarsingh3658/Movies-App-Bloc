@@ -33,7 +33,9 @@ class PasswordInputWidget extends StatelessWidget {
           onChanged: (value) {
             context.read<LoginBloc>().add(PasswordChanged(password: value));
           },
-          onFieldSubmitted: (value) {},
+          onFieldSubmitted: (value) {
+            context.read<LoginBloc>().add(PasswordChanged(password: value));
+          },
         );
       },
     );

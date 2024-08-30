@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app_bloc/Config/Components/round_button.dart';
+import 'package:movies_app_bloc/Utils/enums.dart';
 import 'package:movies_app_bloc/Views/Login/Widgets/Email_Input_widget.dart';
 import 'package:movies_app_bloc/Views/Login/Widgets/password_input_widget.dart';
 import 'package:movies_app_bloc/bloc/Login%20Bloc/login_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app_bloc/bloc/Login%20Bloc/login_events.dart';
 import 'package:movies_app_bloc/bloc/Login%20Bloc/login_state.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-     _loginBloc = LoginBloc();
+    _loginBloc = LoginBloc();
   }
 
   @override
@@ -53,21 +55,40 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  BlocBuilder<LoginBloc, LoginState>(
-                    buildWhen: (previous, current) => false,
-                    builder: (context, state) {
-                      return RoundButton(
-                          title: 'Login',
-                          onPress: () {
-                            if (_formKey.currentState!.validate()) {
-                              if (state.password.length < 6) {
-                                print(
-                                    "Password cannot be less than 6 characters");
-                              }
-                              print('I am Here');
-                            }
-                          });
+                  BlocListener<LoginBloc, LoginState>(
+                    listenWhen: (previous, current) =>
+                        current.postApiStatus != previous.postApiStatus,
+                    listener: (context, state) {
+                      if (state.postApiStatus == PostApiStatus.error) {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(
+                              content: Text(state.message.toString())));
+                      }
+                      if (state.postApiStatus == PostApiStatus.success) {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(
+                              content: Text(state.message.toString())));
+                      }
+                      if (state.postApiStatus == PostApiStatus.loading) {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(content: Text("Sumitting")));
+                      }
                     },
+                    child: BlocBuilder<LoginBloc, LoginState>(
+                      buildWhen: (previous, current) => false,
+                      builder: (context, state) {
+                        return RoundButton(
+                            title: 'Login',
+                            onPress: () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<LoginBloc>().add(LoginButton());
+                              }
+                            });
+                      },
+                    ),
                   )
                 ],
               )),
