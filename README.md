@@ -1,6 +1,6 @@
 # blocXMvvmLoginApp
 
-A new Flutter project.
+Template Project for practise with Bloc and user session management
 
 ## Getting Started
 
